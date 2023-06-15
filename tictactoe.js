@@ -11,11 +11,14 @@ const player1 = playerFactory('jeremy', 'x')
 
 
 /*
+DELETE WHEN COMPLETED
 numbering for board spaces
 [
-    [0,1,2]
-    [3,4,5]
-    [6,7,8]
+           8
+    [0,1,2]4
+    [3,4,5]5
+    [6,7,8]6
+     1 2 3 7
 ]
 */
 
@@ -37,9 +40,9 @@ const gameBoard = (() => {
     }
 
     //TODO - initialize players from <input>
-
+    let start = () => {
+        
         let player1 = player('tony', 'o', true)
-        let j = 0
         for (let i = 0; i < spaces.length; i++){
             spaces[i].addEventListener('click', () => {
                 j++
@@ -52,6 +55,7 @@ const gameBoard = (() => {
                 }
             })
         }   
+    }
 
 
 
