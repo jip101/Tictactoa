@@ -4,6 +4,7 @@
     background-color: beige;
 }
 main {
+    min-height: 350px;
     margin: 2%;
     background-color: teal;
     height: 50vh;
@@ -68,3 +69,19 @@ main {
 svg {
     /*transform: scale();*/
 }
+
+#playerSelect {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    text-align: center;
+}  
+
+
+/*
+label, input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}*/

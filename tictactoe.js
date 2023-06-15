@@ -23,17 +23,35 @@ const gameBoard = (() => {
     let spaces = document.getElementsByClassName('box')
     console.log(spaces)
     spaces[0].groups = ['left', 'top', 'bSlash']
-    spaces[1].groups = ['vMiddle', 'top']
+    spaces[1].groups = ['vMid', 'top']
     spaces[2].groups = ['right', 'top', 'fSlash']
-    spaces[3].groups = ['left', 'hMiddle']
-    spaces[4].groups = ['vMiddle', 'hMiddle', 'bSlash', 'fSlash']
-    spaces[5].groups = ['right', 'hMiddle']
+    spaces[3].groups = ['left', 'hMid']
+    spaces[4].groups = ['vMid', 'hMid', 'bSlash', 'fSlash']
+    spaces[5].groups = ['right', 'hMid']
     spaces[6].groups = ['left', 'bottom', 'fSlash']
-    spaces[7].groups = ['vMiddle', 'bottom']
+    spaces[7].groups = ['vMid', 'bottom']
     spaces[8].groups = ['right', 'bottom', 'bSlash']
 
+    let player = (name, symbol, turn) => {
+        return {name, symbol, turn}
+    }
 
+    //TODO - initialize players from <input>
 
+        let player1 = player('tony', 'o', true)
+        let j = 0
+        for (let i = 0; i < spaces.length; i++){
+            spaces[i].addEventListener('click', () => {
+                j++
+                console.log(j)
+                if (!spaces[i].owner && player1.turn === true) {
+                    spaces[i].owner = player1.name
+                    spaces[i].innerHTML = `<h1>${player1.symbol}</h1>`
+                    player1.turn = false
+                    console.log(spaces[i].owner)
+                }
+            })
+        }   
 
 
 
@@ -44,21 +62,11 @@ const gameBoard = (() => {
                 spaces[i].removeChild(spaces[i].lastChild)
                 spaces[i].owner = ''
             }
-            spaces[i].addEventListener('click', () => {
-                console.log(player1)
-                if (!spaces[i].owner && player1.turn === true) {
-                    spaces[i].owner = player1.name
-                    spaces[i].innerHTML = '<h1>X</h1>'
-                    player1.turn = false
-                    console.log(spaces[i].owner)
-                }
-            })
+
         }
     }
     //console.log(spaces)
-    let player = (name, symbol, turn) => {
-        return {name, symbol, turn}
-    }
+
 
     
 
