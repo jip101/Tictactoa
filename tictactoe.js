@@ -31,48 +31,81 @@ const gameBoard = (() => {
     spaces[3].groups = ['left', 'hMid']
     spaces[4].groups = ['vMid', 'hMid', 'bSlash', 'fSlash']
     spaces[5].groups = ['right', 'hMid']
-    spaces[6].groups = ['left', 'bottom', 'fSlash']
-    spaces[7].groups = ['vMid', 'bottom']
-    spaces[8].groups = ['right', 'bottom', 'bSlash']
+    spaces[6].groups = ['left', 'bot', 'fSlash']
+    spaces[7].groups = ['vMid', 'bot']
+    spaces[8].groups = ['right', 'bot', 'bSlash']
 
-    let player = (name, symbol, turn) => {
-        return {name, symbol, turn}
+    let player = (name, symbol) => {
+        let groups = {
+            left: 0,
+            top: 0,
+            right: 0,
+            bot: 0,
+            vMid: 0,
+            hMid: 0,
+            fSlash: 0,
+            bSlash:0
+        }
+        return {name, symbol, turn: false, groups}
     }
 
     //TODO - initialize players from <input>
     let start = () => {
         
-        let player1 = player('tony', 'o', true)
+        let player1 = player('tony', 'x')
+        let player2 = player('george', 'o')
         for (let i = 0; i < spaces.length; i++){
             spaces[i].addEventListener('click', () => {
-                j++
-                console.log(j)
                 if (!spaces[i].owner && player1.turn === true) {
                     spaces[i].owner = player1.name
                     spaces[i].innerHTML = `<h1>${player1.symbol}</h1>`
                     player1.turn = false
-                    console.log(spaces[i].owner)
+                    player2.turn = true
+                    spaces[i].groups.forEach(group => {
+                        player1.groups[group]++
+                    })
+                    console.log(player1.groups)
+
+                }
+                else if (!spaces[i].owner && player2.turn === true) {
+                    spaces[i].owner = player2.name
+                    spaces[i].innerHTML = `<h1>${player2.symbol}</h1>`
+                    player1.turn = true
+                    player2.turn = false
+                    console.log(spaces[i].groups)
                 }
             })
-        }   
+        }
     }
+
+    let changethisfn = player => {
+        if (!spaces[i].owner && player1.turn === true) {
+            spaces[i].owner = player1.name
+            spaces[i].innerHTML = `<h1>${player1.symbol}</h1>`
+            player1.turn = false
+            player2.turn = true
+            spaces[i].groups.forEach(group => {
+                player1.groups[group]++
+            })
+            console.log(player1.groups)
+        }
+    }
+    
 
 
 
     let newGame = () => {
-        let player1 = player('jeremy', 'x', true)
         for (let i = 0; i < spaces.length; i++){
             while(spaces[i].firstChild) {
                 spaces[i].removeChild(spaces[i].lastChild)
                 spaces[i].owner = ''
             }
-
         }
     }
     //console.log(spaces)
 
 
-    
+
 
     const space1 = document.getElementById('5')
     let change = (text) => space1.innerHTML = text
@@ -80,10 +113,9 @@ const gameBoard = (() => {
 
     newGame()
 
-    return {change, player, newGame}
+    return {change, player, newGame, start}
 })();
 
-let start = gameBoard
-let end = gameBoard
+gameBoard.start()
 //player1 = start.player('jeremy', 'x', true)
 //start.newGame()
