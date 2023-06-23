@@ -23,6 +23,9 @@ numbering for board spaces
 */
 
 const gameBoard = (() => {
+    const players = []
+    players.push('player1')
+    console.log(players)
     let spaces = document.getElementsByClassName('box')
     console.log(spaces)
     spaces[0].groups = ['left', 'top', 'bSlash']
@@ -54,53 +57,51 @@ const gameBoard = (() => {
         
         let player1 = player('tony', 'x')
         let player2 = player('george', 'o')
+        players.push(player2)
         for (let i = 0; i < spaces.length; i++){
             spaces[i].addEventListener('click', () => {
-                if (!spaces[i].owner && player1.turn === true) {
-                    spaces[i].owner = player1.name
-                    spaces[i].innerHTML = `<h1>${player1.symbol}</h1>`
-                    player1.turn = false
-                    player2.turn = true
-                    spaces[i].groups.forEach(group => {
-                        player1.groups[group]++
-                    })
-                    console.log(player1.groups)
 
-                }
-                else if (!spaces[i].owner && player2.turn === true) {
-                    spaces[i].owner = player2.name
-                    spaces[i].innerHTML = `<h1>${player2.symbol}</h1>`
-                    player1.turn = true
-                    player2.turn = false
-                    console.log(spaces[i].groups)
-                }
             })
         }
+        return players
+    }
+    
+    let swapActivePlyr = playerList => {
+        playerList.forEach(plyr => {
+            if (plyr.turn === false) {
+                plyr.turn = true
+            }
+            else {
+                plyr.turn = false
+            }
+        })
     }
 
     let changethisfn = player => {
-        if (!spaces[i].owner && player1.turn === true) {
-            spaces[i].owner = player1.name
-            spaces[i].innerHTML = `<h1>${player1.symbol}</h1>`
-            player1.turn = false
-            player2.turn = true
+        if (!spaces[i].owner && player.turn === true) {
+            spaces[i].owner = player.name
+            spaces[i].innerHTML = `<h1>${player.symbol}</h1>`
+            swapActivePlyr()
             spaces[i].groups.forEach(group => {
-                player1.groups[group]++
+                player.groups[group]++
             })
-            console.log(player1.groups)
+            console.log(player.groups)
         }
     }
+
     
 
 
 
     let newGame = () => {
+        players.splice(0, 2)
         for (let i = 0; i < spaces.length; i++){
             while(spaces[i].firstChild) {
                 spaces[i].removeChild(spaces[i].lastChild)
                 spaces[i].owner = ''
             }
         }
+        return players
     }
     //console.log(spaces)
 
@@ -119,3 +120,9 @@ const gameBoard = (() => {
 gameBoard.start()
 //player1 = start.player('jeremy', 'x', true)
 //start.newGame()
+
+/*
+let randomNum = () => {
+    return Math.floor(Math.random() * 2)
+}
+*/
