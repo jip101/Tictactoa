@@ -25,7 +25,7 @@ numbering for board spaces
 const gameBoard = (() => {
     const players = []
     let spaces = document.getElementsByClassName('box')
-    console.log(spaces)
+    let totalMoves = 0
 
 
     let createPlayer = (name, symbol) => {
@@ -53,11 +53,9 @@ const gameBoard = (() => {
         let user2 = createPlayer(player2.value, '<svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" viewBox="0 0 24 24" stroke-width="3" stroke="black" fill="none"> <path d="M18 9a5 5 0 0 0 -5 -5h-2a5 5 0 0 0 -5 5v6a5 5 0 0 0 5 5h2a5 5 0 0 0 5 -5v-6" /> </svg>')
         console.log(user1.name)
         players.push(user1, user2)
- //       let randomizeMove = (() => {
-            let selector = Math.floor(Math.random() * 2)
-            players[selector].turn = true
-            display.innerText = `${players[selector].name}'s turn`
- //       })();
+        let plyrSelector = Math.floor(Math.random() * 2)
+        players[plyrSelector].turn = true
+        display.innerText = `${players[plyrSelector].name}'s turn`
         for (let i = 0; i < spaces.length; i++){
             spaces[i].addEventListener('click', () => {
                 players.forEach(user => {
@@ -82,16 +80,22 @@ const gameBoard = (() => {
 
     let selectBox = (i, player) => {
         if (!spaces[i].owner && player.turn === true) {
+            totalMoves++
+            console.log(totalMoves)
             spaces[i].owner = player.name
             spaces[i].innerHTML = `${player.symbol}`
             console.log(player.name, player.groups)
             swapActivePlyr()
-            spaces[i].groups.forEach(group => {
-                player.groups[group]++
-                if (player.groups[group] === 3) {
+            spaces[i].groups.forEach(row => {
+                player.groups[row]++
+                if (player.groups[row] === 3) {
                     document.querySelector('#display').innerHTML = `${player.name} wins!`
                     win(player)
-                    
+                    console.log(`${player.name} wins!`)
+                }
+                else if (totalMoves >= 9) {
+                    document.querySelector('#display').innerHTML = `Tied Game`
+
                 }
             })
         }
@@ -99,13 +103,14 @@ const gameBoard = (() => {
 
     let win = (player) => {
         for (let i = 0; i < spaces.length; i++) {
-            spaces[i].parentNode.replaceChild(spaces[i].cloneNode(true), spaces[i])
+            spaces[i].owner = 'gameOver'
         }
         console.log(`${player.name} wins!`)
     }
 
 
     let clearBoard = () => {
+        totalMoves = 0
         players.splice(0, 2)
         for (let i = 0; i < spaces.length; i++) {
             spaces[i].parentNode.replaceChild(spaces[i].cloneNode(true), spaces[i])

@@ -3,11 +3,20 @@
     margin: 0;
     background-color: beige;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 main {
+    width: 100%;
     min-height: 350px;
+    max-height: 800px;
+    max-width: 1000px;
     margin: 2%;
     background-color: teal;
-    height: 50vh;
+    height: 50%;
     display: grid;
     grid-template-columns: 1fr 5px 1fr 5px 1fr;
     grid-template-rows: 1fr 5px 1fr 5px 1fr;
@@ -15,6 +24,7 @@ main {
     justify-items: center;
     align-items: center;
     border-radius: 8px;
+    align-self: center;
 }
 
 .box {
@@ -67,7 +77,8 @@ main {
 }
 
 svg {
-    /*transform: scale();*/
+    box-sizing: border-box;
+    border-radius: 4px;
 }
 
 #playerSelect {
