@@ -84,20 +84,30 @@ const gameBoard = (() => {
         if (!spaces[i].owner && player.turn === true) {
             spaces[i].owner = player.name
             spaces[i].innerHTML = `${player.symbol}`
-            console.log(player.groups)
+            console.log(player.name, player.groups)
             swapActivePlyr()
             spaces[i].groups.forEach(group => {
                 player.groups[group]++
+                if (player.groups[group] === 3) {
+                    document.querySelector('#display').innerHTML = `${player.name} wins!`
+                    win(player)
+                    
+                }
             })
         }
     }
 
-    
+    let win = (player) => {
+        for (let i = 0; i < spaces.length; i++) {
+            spaces[i].parentNode.replaceChild(spaces[i].cloneNode(true), spaces[i])
+        }
+        console.log(`${player.name} wins!`)
+    }
 
 
     let clearBoard = () => {
         players.splice(0, 2)
-        for (let i = 0; i < spaces.length; i++){
+        for (let i = 0; i < spaces.length; i++) {
             spaces[i].parentNode.replaceChild(spaces[i].cloneNode(true), spaces[i])
             while(spaces[i].firstChild) {
                 spaces[i].removeChild(spaces[i].lastChild)
