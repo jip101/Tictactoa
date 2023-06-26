@@ -9,26 +9,37 @@ body {
     flex-direction: column;
 }
 
+
 main {
+    --min: 50px;
+    --max: 1fr;
     width: 100%;
-    min-height: 350px;
+    min-height: 400px;
     max-height: 800px;
-    max-width: 1000px;
+    max-width: 800px;
     margin: 2%;
     background-color: teal;
     height: 50%;
     display: grid;
     grid-template-columns: 1fr 5px 1fr 5px 1fr;
-    grid-template-rows: 1fr 5px 1fr 5px 1fr;
-    grid-template-areas: "";
+    grid-template-rows: minmax(var(--min), var(--max)) 5px minmax(var(--min), var(--max)) 5px minmax(var(--min), var(--max));
     justify-items: center;
     align-items: center;
     border-radius: 8px;
     align-self: center;
 }
 
+@media (max-height: 500px) and (orientation:landscape) {
+    main {
+        min-height: 300px;
+        max-height: 350px;
+        max-width: 500px;
+        background-color: grey;
+    }
+}
+
 .box {
-    background-color: aliceblue;
+    background-color: beige;
     height: 65%;
     width: 50%;
     display: flex;
@@ -79,6 +90,7 @@ main {
 svg {
     box-sizing: border-box;
     border-radius: 4px;
+    transform: scale(100%);
 }
 
 #playerSelect {
