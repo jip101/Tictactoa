@@ -7,6 +7,8 @@
 body {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    justify-content: center;
 }
 
 
@@ -14,7 +16,8 @@ main {
     --min: 50px;
     --max: 1fr;
     width: 100%;
-    min-height: 400px;
+    min-width: 280px;
+    min-height: 420px;
     max-height: 800px;
     max-width: 800px;
     margin: 2%;
@@ -94,11 +97,19 @@ svg {
 }
 
 #playerSelect {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    text-align: center;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    box-sizing: border-box;
+    width: 300px;
+    height: 250px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
 }  
 
 
