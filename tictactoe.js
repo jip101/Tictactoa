@@ -1,17 +1,4 @@
 /*
-function playerFactory(name, symbol) {
-    const displayInfo = () => {
-        return `Player is named ${name}, playing as ${symbol}`
-    }
-    return {name, symbol, displayInfo}
-}
-
-const player1 = playerFactory('jeremy', 'x')
-*/
-
-
-/*
-DELETE WHEN COMPLETED
 numbering for board spaces
 [
            8
