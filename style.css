@@ -32,12 +32,30 @@ main {
     align-self: center;
 }
 
+header::after {
+    content: 'Tic-Tac-Toe';
+    position: absolute;
+    font-size: 4em;
+    white-space: nowrap;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 0 8px;
+    background-color: teal;
+}
+
 @media (max-height: 500px) and (orientation:landscape) {
     main {
         min-height: 300px;
         max-height: 350px;
         max-width: 500px;
         background-color: grey;
+    }
+
+    header::after {
+        content: '';
     }
 }
 
@@ -110,6 +128,7 @@ svg {
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    gap: 5px;
 }  
 
 
@@ -117,4 +136,17 @@ svg {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#display {
+    position: relative;
+    text-align: center;
+    height: 12px;
+}
+
+#resultScreen {
+    position: relative;
+    bottom: 26px;
+    color: teal;
+    text-align: center;
 }
